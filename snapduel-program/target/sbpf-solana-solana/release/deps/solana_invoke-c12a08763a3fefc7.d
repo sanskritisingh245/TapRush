@@ -1,0 +1,9 @@
+/Users/sanskritisingh/Documents/hackthon/snapduel-program/target/sbpf-solana-solana/release/deps/solana_invoke-c12a08763a3fefc7.d: /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/lib.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/stable_instruction_borrowed.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/../README.md
+
+/Users/sanskritisingh/Documents/hackthon/snapduel-program/target/sbpf-solana-solana/release/deps/libsolana_invoke-c12a08763a3fefc7.rlib: /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/lib.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/stable_instruction_borrowed.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/../README.md
+
+/Users/sanskritisingh/Documents/hackthon/snapduel-program/target/sbpf-solana-solana/release/deps/libsolana_invoke-c12a08763a3fefc7.rmeta: /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/lib.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/stable_instruction_borrowed.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/../README.md
+
+/Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/lib.rs:
+/Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/stable_instruction_borrowed.rs:
+/Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-invoke-0.4.0/src/../README.md:

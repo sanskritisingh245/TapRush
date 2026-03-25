@@ -1,0 +1,85 @@
+publisher:
+  name: Sanskriti Singh
+  website: https://github.com/sanskritisingh245
+  email: sanskritiisinghh2404@gmail.com
+  support_email: sanskritiisinghh2404@gmail.com
+app:
+  name: TapRush
+  address: 4dXnZYZnRgZz17ohDCKYTQnbG3rRQcE25GuEJ8ZME8sv
+  android_package: com.anonymous.taprush
+  urls:
+    license_url: https://github.com/sanskritisingh245
+    copyright_url: https://github.com/sanskritisingh245
+    privacy_policy_url: https://github.com/sanskritisingh245
+    website: https://github.com/sanskritisingh245
+  media:
+    - purpose: icon
+      uri: ./media/icon.png
+release:
+  address: BM9NvzMHhW3pZQDa3ULbWNuFh11v5Yi6PsEdyS3k65tb
+  media:
+    - purpose: icon
+      uri: ./media/icon.png
+    - purpose: banner
+      uri: ./media/Banner.png
+    - purpose: screenshot
+      uri: ./media/screenshot_1.png
+    - purpose: screenshot
+      uri: ./media/screenshot_2.png
+    - purpose: screenshot
+      uri: ./media/screenshot_3.png
+    - purpose: screenshot
+      uri: ./media/screenshot_4.png
+  files:
+    - purpose: install
+      uri: ./files/app-release.apk
+  catalog:
+    en-US:
+      name: TapRush
+      short_description: Quick-draw duel game on Solana
+      long_description: |
+        TapRush (SnapDuel) is a mobile-only quick-draw betting game built on Solana.
+
+        HOW IT WORKS:
+        - Two players wager SOL and enter a standoff screen
+        - After a random delay (2-15 seconds), both phones vibrate simultaneously
+        - The first player to tap AFTER the vibration wins the pot
+        - Tap BEFORE the vibration = instant forfeit
+        - Winner takes all (minus 5% rake)
+
+        FEATURES:
+        - Real SOL wagering via Solana blockchain
+        - Credit-based system (1 top-up = 5 plays)
+        - Random matchmaking or challenge friends with invite codes
+        - Anti-cheat: latency-compensated reaction timing
+        - ELO leaderboard and achievement system
+        - Tier progression: Bronze > Silver > Gold > Diamond > Phantom
+        - Daily challenges for bonus credits and XP
+        - Bot practice mode for new players
+
+        Built with Solana, Anchor, Expo (React Native).
+      new_in_version: Initial release - quick-draw duels with SOL wagering, matchmaking, leaderboards, and achievements.
+  android_details:
+    cert_fingerprint: 058d215792f40da4b4d5f3302651c9d08cfd8d554d1b17d9431b20600800beeb
+    min_sdk: 24
+    version: 1.0.0
+    version_code: 1
+    locales:
+      - en-US
+solana_mobile_dapp_publisher_portal:
+  google_store_package: ''
+  testing_instructions: |
+    1. Open the app and connect a Solana wallet (Phantom recommended)
+    2. Tap "Top Up" to deposit 0.05 SOL for 5 play credits
+    3. Tap "Play" to enter random matchmaking queue
+    4. Once matched, hold your phone still during the standoff screen
+    5. When the phone vibrates, tap as fast as possible
+    6. Fastest valid tap wins the pot (0.019 SOL after 5% rake)
+    Alternative: Use "Challenge Friend" to create a room with a 6-character invite code
+    Note: You can test against the built-in bot by enabling bot mode in matchmaking
+lastSubmittedVersionOnChain:
+  address: BM9NvzMHhW3pZQDa3ULbWNuFh11v5Yi6PsEdyS3k65tb
+  version_code: 1
+  apk_hash: nbtgwau+/V6ld2sJ6NVAzX9OZ+xl0UZkpFGTFi1RNsI=
+lastUpdatedVersionOnStore:
+  address: BM9NvzMHhW3pZQDa3ULbWNuFh11v5Yi6PsEdyS3k65tb

@@ -1,0 +1,33 @@
+[toolchain]
+channel = "stable"
+
+[features]
+seeds = false
+skip-lint = false
+
+[programs.devnet]
+snapduel = "33tKSaZpH1fiCZDnMswH5McVW21PYrUF1B9g73wnQBa1"
+
+[programs.localnet]
+snapduel = "33tKSaZpH1fiCZDnMswH5McVW21PYrUF1B9g73wnQBa1"
+
+[registry]
+url = "https://api.apr.dev"
+
+[provider]
+cluster = "localnet"
+wallet = "~/.config/solana/id.json"
+
+[scripts]
+test = "npx ts-mocha -p ./tsconfig.json -t 1000000 tests/**/*.ts"
+
+[workspace]
+members = ["programs/snapduel"]
+
+# ─── Project Metadata ─────────────────────────────────────────────────────────
+# Project  : SnapDuel — On-chain quick-draw betting game on Solana
+# Author   : Sanskriti Singh
+# Email    : sanskritiisinghh2404@gmail.com
+# GitHub   : https://github.com/sanskritisingh245
+# Network  : Devnet (for testing) → Mainnet-beta (production)
+# Program  : 4 instructions — top_up, deduct_credit, settle_match, cancel_match

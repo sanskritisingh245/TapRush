@@ -1,0 +1,9 @@
+/Users/sanskritisingh/Documents/hackthon/snapduel-program/target/sbpf-solana-solana/release/deps/solana_system_interface-a5946a34319c8b54.d: /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/lib.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/error.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/instruction.rs
+
+/Users/sanskritisingh/Documents/hackthon/snapduel-program/target/sbpf-solana-solana/release/deps/libsolana_system_interface-a5946a34319c8b54.rlib: /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/lib.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/error.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/instruction.rs
+
+/Users/sanskritisingh/Documents/hackthon/snapduel-program/target/sbpf-solana-solana/release/deps/libsolana_system_interface-a5946a34319c8b54.rmeta: /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/lib.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/error.rs /Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/instruction.rs
+
+/Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/lib.rs:
+/Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/error.rs:
+/Users/sanskritisingh/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/solana-system-interface-1.0.0/src/instruction.rs:

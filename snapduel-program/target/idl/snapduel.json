@@ -1,0 +1,897 @@
+{
+  "address": "33tKSaZpH1fiCZDnMswH5McVW21PYrUF1B9g73wnQBa1",
+  "metadata": {
+    "name": "snapduel",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "SnapDuel — On-chain quick-draw betting game on Solana",
+    "repository": "https://github.com/sanskritisingh245"
+  },
+  "instructions": [
+    {
+      "name": "cancel_match",
+      "docs": [
+        "Cancels a match (disconnect / timeout / tie) and restores credits.",
+        "",
+        "- Returns 2 × WAGER_LAMPORTS from escrow → treasury",
+        "- Refunds 1 credit to each player",
+        "- Marks escrow as settled (prevents double-cancel)",
+        "",
+        "Only the backend authority keypair can sign this instruction."
+      ],
+      "discriminator": [
+        142,
+        136,
+        247,
+        45,
+        92,
+        112,
+        180,
+        83
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "docs": [
+            "Backend authority keypair"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "match_escrow",
+          "docs": [
+            "Match escrow — must not be already settled"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "match_escrow.match_id",
+                "account": "MatchEscrow"
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "docs": [
+            "Treasury PDA — receives the returned pot"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  101,
+                  97,
+                  115,
+                  117,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_one_credits",
+          "docs": [
+            "Player one's credit account — receives +1 credit refund"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  100,
+                  105,
+                  116,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "match_escrow.player_one",
+                "account": "MatchEscrow"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_two_credits",
+          "docs": [
+            "Player two's credit account — receives +1 credit refund"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  100,
+                  105,
+                  116,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "match_escrow.player_two",
+                "account": "MatchEscrow"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "deduct_credit",
+      "docs": [
+        "Backend deducts 1 credit from each player and creates a match escrow.",
+        "",
+        "- Atomically decrements both players' play credits by 1",
+        "- Creates a new MatchEscrow PDA keyed by `match_id`",
+        "- Moves 2 × WAGER_LAMPORTS from treasury → escrow to fund the pot",
+        "",
+        "Only the backend authority keypair can sign this instruction.",
+        "The `init` constraint on match_escrow prevents the same match_id",
+        "from being used twice (replay attack prevention)."
+      ],
+      "discriminator": [
+        61,
+        215,
+        118,
+        57,
+        3,
+        197,
+        185,
+        196
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "docs": [
+            "Backend authority keypair — must sign every deduct_credit call"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "player_one"
+        },
+        {
+          "name": "player_two"
+        },
+        {
+          "name": "player_one_credits",
+          "docs": [
+            "Player one's credit account — must exist and have ≥ 1 play"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  100,
+                  105,
+                  116,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player_one"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_two_credits",
+          "docs": [
+            "Player two's credit account — must exist and have ≥ 1 play"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  100,
+                  105,
+                  116,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player_two"
+              }
+            ]
+          }
+        },
+        {
+          "name": "treasury",
+          "docs": [
+            "Treasury PDA — funds the match escrow"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  101,
+                  97,
+                  115,
+                  117,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "match_escrow",
+          "docs": [
+            "Match escrow PDA — created fresh for each unique match_id.",
+            "`init` means this fails if the account already exists → replay prevention."
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "arg",
+                "path": "match_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "match_id",
+          "type": {
+            "array": [
+              "u8",
+              16
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "settle_match",
+      "docs": [
+        "Settles a completed match: sends pot to winner, rake to treasury.",
+        "",
+        "- Validates that `winner` is one of the two players in the escrow",
+        "- Marks the escrow as settled (replay-proof via `settled` flag + constraint)",
+        "- Transfers (pot - rake) lamports from escrow → winner",
+        "- Transfers rake lamports from escrow → treasury",
+        "- Updates ELO leaderboard for both players",
+        "",
+        "Only the backend authority keypair can sign this instruction."
+      ],
+      "discriminator": [
+        71,
+        124,
+        117,
+        96,
+        191,
+        217,
+        116,
+        24
+      ],
+      "accounts": [
+        {
+          "name": "authority",
+          "docs": [
+            "Backend authority keypair"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "match_escrow",
+          "docs": [
+            "Match escrow — must not be already settled"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  101,
+                  115,
+                  99,
+                  114,
+                  111,
+                  119
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "match_escrow.match_id",
+                "account": "MatchEscrow"
+              }
+            ]
+          }
+        },
+        {
+          "name": "winner",
+          "writable": true
+        },
+        {
+          "name": "treasury",
+          "docs": [
+            "Treasury PDA — receives the rake"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  101,
+                  97,
+                  115,
+                  117,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_one_leaderboard",
+          "docs": [
+            "Player one's leaderboard — created if this is their first match"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  101,
+                  97,
+                  100,
+                  101,
+                  114,
+                  98,
+                  111,
+                  97,
+                  114,
+                  100
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "match_escrow.player_one",
+                "account": "MatchEscrow"
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_two_leaderboard",
+          "docs": [
+            "Player two's leaderboard — created if this is their first match"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  108,
+                  101,
+                  97,
+                  100,
+                  101,
+                  114,
+                  98,
+                  111,
+                  97,
+                  114,
+                  100
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "match_escrow.player_two",
+                "account": "MatchEscrow"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "winner",
+          "type": "pubkey"
+        }
+      ]
+    },
+    {
+      "name": "top_up",
+      "docs": [
+        "Player deposits SOL into the treasury and receives 5 play credits.",
+        "",
+        "This is the ONLY instruction that players sign directly from their wallet.",
+        "All other instructions are signed by the backend authority keypair.",
+        "",
+        "Accounts: player (signer + payer), treasury PDA, player_credits PDA"
+      ],
+      "discriminator": [
+        236,
+        225,
+        96,
+        9,
+        60,
+        106,
+        77,
+        208
+      ],
+      "accounts": [
+        {
+          "name": "player",
+          "docs": [
+            "Player wallet — signs the transaction and pays for rent"
+          ],
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "treasury",
+          "docs": [
+            "Treasury PDA — program-controlled SOL vault"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  116,
+                  114,
+                  101,
+                  97,
+                  115,
+                  117,
+                  114,
+                  121
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "name": "player_credits",
+          "docs": [
+            "Player's credit account — created on first top-up, updated on subsequent ones"
+          ],
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  99,
+                  114,
+                  101,
+                  100,
+                  105,
+                  116,
+                  115
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "player"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": []
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Leaderboard",
+      "discriminator": [
+        247,
+        186,
+        238,
+        243,
+        194,
+        30,
+        9,
+        36
+      ]
+    },
+    {
+      "name": "MatchEscrow",
+      "discriminator": [
+        41,
+        253,
+        245,
+        149,
+        7,
+        243,
+        203,
+        139
+      ]
+    },
+    {
+      "name": "PlayerCredits",
+      "discriminator": [
+        136,
+        27,
+        81,
+        189,
+        32,
+        49,
+        207,
+        235
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "MatchCancelledEvent",
+      "discriminator": [
+        229,
+        189,
+        48,
+        183,
+        219,
+        47,
+        20,
+        37
+      ]
+    },
+    {
+      "name": "MatchCreatedEvent",
+      "discriminator": [
+        101,
+        99,
+        74,
+        54,
+        121,
+        190,
+        111,
+        238
+      ]
+    },
+    {
+      "name": "MatchSettledEvent",
+      "discriminator": [
+        56,
+        219,
+        213,
+        131,
+        79,
+        126,
+        13,
+        227
+      ]
+    },
+    {
+      "name": "TopUpEvent",
+      "discriminator": [
+        232,
+        199,
+        164,
+        60,
+        119,
+        195,
+        17,
+        183
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InsufficientCredits",
+      "msg": "Insufficient play credits — top up to get more plays"
+    },
+    {
+      "code": 6001,
+      "name": "MatchAlreadySettled",
+      "msg": "Match has already been settled"
+    },
+    {
+      "code": 6002,
+      "name": "InvalidWinner",
+      "msg": "Invalid winner — must be player_one or player_two from the escrow"
+    },
+    {
+      "code": 6003,
+      "name": "SamePlayer",
+      "msg": "Both players must be different wallets"
+    },
+    {
+      "code": 6004,
+      "name": "Overflow",
+      "msg": "Arithmetic overflow"
+    }
+  ],
+  "types": [
+    {
+      "name": "Leaderboard",
+      "docs": [
+        "Per-player win/loss record and ELO rating.",
+        "PDA seeds: [\"leaderboard\", player_pubkey]",
+        "Space: 8 + 32 + 4 + 4 + 2 + 1 = 51 bytes"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "wins",
+            "type": "u32"
+          },
+          {
+            "name": "losses",
+            "type": "u32"
+          },
+          {
+            "name": "elo",
+            "type": "u16"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MatchCancelledEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "match_id",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          }
+        ]
+      }
+    },
+    {
+      "name": "MatchCreatedEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "match_id",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "player_one",
+            "type": "pubkey"
+          },
+          {
+            "name": "player_two",
+            "type": "pubkey"
+          },
+          {
+            "name": "wager_lamports",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MatchEscrow",
+      "docs": [
+        "Holds escrowed SOL for a single match.",
+        "PDA seeds: [\"escrow\", match_id_bytes]",
+        "Space: 8 + 16 + 32 + 32 + 8 + 1 + 32 + 8 + 1 = 138 bytes"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "match_id",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "player_one",
+            "type": "pubkey"
+          },
+          {
+            "name": "player_two",
+            "type": "pubkey"
+          },
+          {
+            "name": "wager_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "settled",
+            "type": "bool"
+          },
+          {
+            "name": "winner",
+            "type": "pubkey"
+          },
+          {
+            "name": "created_at",
+            "type": "i64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "MatchSettledEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "match_id",
+            "type": {
+              "array": [
+                "u8",
+                16
+              ]
+            }
+          },
+          {
+            "name": "winner",
+            "type": "pubkey"
+          },
+          {
+            "name": "payout",
+            "type": "u64"
+          },
+          {
+            "name": "rake",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "PlayerCredits",
+      "docs": [
+        "Tracks a player's remaining plays and lifetime top-up count.",
+        "PDA seeds: [\"credits\", player_pubkey]",
+        "Space: 8 (discriminator) + 32 + 1 + 8 + 1 = 50 bytes"
+      ],
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "plays_remaining",
+            "type": "u8"
+          },
+          {
+            "name": "total_topped_up",
+            "type": "u64"
+          },
+          {
+            "name": "bump",
+            "type": "u8"
+          }
+        ]
+      }
+    },
+    {
+      "name": "TopUpEvent",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "player",
+            "type": "pubkey"
+          },
+          {
+            "name": "cost_lamports",
+            "type": "u64"
+          },
+          {
+            "name": "plays_remaining",
+            "type": "u8"
+          }
+        ]
+      }
+    }
+  ]
+}

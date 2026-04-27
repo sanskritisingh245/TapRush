@@ -84,8 +84,12 @@ router.post('/verify', async (req, res) => {
   res.json({ token });
 });
 
-// POST /auth/dev-login — dev mode: skip signature, issue JWT directly
+// POST /auth/dev-login — dev mode only: skip signature, issue JWT directly
 router.post('/dev-login', async (req, res) => {
+  if (process.env.NODE_ENV === 'production') {
+    return res.status(404).json({ error: 'Not found' });
+  }
+
   const { wallet } = req.body;
   if (!wallet || typeof wallet !== 'string') {
     return res.status(400).json({ error: 'Missing wallet' });
@@ -93,7 +97,6 @@ router.post('/dev-login', async (req, res) => {
 
   const db = req.app.locals.db;
 
-  // Upsert player
   await db.insert(players).values({ wallet, lastSeen: Date.now() }).onConflictDoUpdate({
     target: players.wallet,
     set: { lastSeen: Date.now() },

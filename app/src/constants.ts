@@ -3,10 +3,10 @@ export const API_URL = 'https://api.fastdraw.fun';
 // Solana config
 export const PROGRAM_ID = 'HKUeBck47FAtguvzH1oceCshmMSxgXqKHTnN2RmcTNsH';
 export const CLUSTER = 'mainnet-beta';
-export const SOLANA_RPC_URL = 'https://mainnet.helius-rpc.com/?api-key=8cfc9ae5-fd56-4ad2-914a-97f4a1c2cf3c';
+export const SOLANA_RPC_URL = 'https://api.mainnet-beta.solana.com';
 
 // Treasury wallet (backend-controlled keypair) — deposits go here
-export const TREASURY_WALLET = '5q757H3kuBXAePqYFRKD1UDBey3cQGuSEGV3PXUcHRYT';
+export const TREASURY_WALLET = 'FoNCZM8bfvJnzC76bGHmHoyCMMi584czcg7zK9nVmofm';
 
 // Mobile Wallet Adapter identity
 export const APP_IDENTITY = {

@@ -19,9 +19,19 @@ program/target/
 # Environment
 .env
 .env.local
+.env.example
 
-# Secrets / keypairs
+# Secrets / keypairs — NEVER commit any of these
+*.pem
+*.key
+*-keypair.json
+*-keypair*.json
+publisher-keypair.json
+devnet-publisher.json
 backend/solana/backend-keypair.json
+publishing/
+snapduel-program/target/
+snapduel-program/.anchor/
 
 # Expo
 .expo/

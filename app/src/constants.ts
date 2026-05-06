@@ -6,7 +6,7 @@ export const CLUSTER = 'mainnet-beta';
 export const SOLANA_RPC_URL = 'https://api.mainnet-beta.solana.com';
 
 // Treasury wallet (backend-controlled keypair) — deposits go here
-export const TREASURY_WALLET = 'FoNCZM8bfvJnzC76bGHmHoyCMMi584czcg7zK9nVmofm';
+export const TREASURY_WALLET = 'Di2xk8KJWgwZXF6VwnCZngtU6rvDMegEy4t2Mfsj5FUs';
 
 // Mobile Wallet Adapter identity
 export const APP_IDENTITY = {

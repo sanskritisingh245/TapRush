@@ -17,7 +17,7 @@
     },
     "ios": {
       "supportsTablet": false,
-      "bundleIdentifier": "com.anonymous.taprush"
+      "bundleIdentifier": "com.fastdraw.taprush"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,10 +27,15 @@
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
       "predictiveBackGestureEnabled": false,
-      "package": "com.anonymous.taprush"
+      "package": "com.fastdraw.taprush"
     },
     "plugins": [
       "expo-font"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "cdee1b32-726e-44dc-afce-dee28f9cd95b"
+      }
+    }
   }
 }

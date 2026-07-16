@@ -1,6 +1,7 @@
 # Tap-or-Trap
 
 A mobile-only quick-draw betting game on Solana. Two players, two phones, one tap. Wager SOL, wait for the haptic buzz, and the first finger after the buzz wins the pot. Tap too early and you forfeit.
+---
 
 <p align="center">
   <img src="screenshots/home.jpeg" width="200" />
